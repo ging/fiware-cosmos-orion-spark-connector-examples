@@ -1,0 +1,34 @@
+version: '2'
+services:
+ mongo:
+   image: mongo:3.4
+   command: --nojournal
+ orion:
+   image: fiware/orion
+   links:
+     - mongo
+   ports:
+     - "1026:1026"
+   command: -dbhost mongo
+ jobmanager:
+   image: flink:1.5.3-hadoop24-scala_2.11
+   expose:
+     - "6123"
+   ports:
+     - "8081:8081"
+   command: jobmanager
+   environment:
+     - JOB_MANAGER_RPC_ADDRESS=jobmanager
+
+ taskmanager:
+   image: flink:1.5.3-hadoop24-scala_2.11
+   expose:
+     - "6121"
+     - "6122"
+   depends_on:
+     - jobmanager
+   command: taskmanager
+   links:
+     - "jobmanager:jobmanager"
+   environment:
+     - JOB_MANAGER_RPC_ADDRESS=jobmanager

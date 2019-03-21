@@ -1,0 +1,8 @@
+site_name:  fiware-cosmos-orion-flink-connector-examples
+repo_url: https://github.com/ging/fiware-cosmos-orion-flink-connector-examples/
+markdown_extensions: [toc,fenced_code,admonition]
+site_description: This project contains a few examples for getting started with the fiware-cosmos-orion-flink-connector.
+docs_dir: doc
+use_directory_urls: false
+theme: readthedocs
+extra_css: ["https://fiware.org/style/fiware_readthedocs.css", "https://fiware.org/style/fiware_readthedocs_processing.css"]
