@@ -3,7 +3,7 @@ do
     temp=$(shuf -i 18-53 -n 1)
     number=$(shuf -i 1-3113 -n 1)
 
-    curl -v -s -S X POST http://localhost:9001 \
+    curl -v -s -S -X POST http://localhost:9001 \
     --header 'Content-Type: application/json; charset=utf-8' \
     --header 'Accept: application/json' \
     --header 'User-Agent: orion/0.10.0' \
@@ -23,7 +23,7 @@ do
          ],
          "subscriptionId": "57458eb60962ef754e7c0998"
      }'
-
+	echo $temp
 
     sleep 1
 done
