@@ -3,6 +3,9 @@ do
     bus1=$(shuf -i 10-53 -n 1)
     bus2=$(shuf -i 10-44 -n 1)
 
+    echo "bus1 = " $bus1
+    echo "bus2 = " $bus2
+
     curl -v -s -S X POST http://localhost:9001 \
     --header 'Content-Type: application/json; charset=utf-8' \
     --header 'Accept: application/json' \
