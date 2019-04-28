@@ -2,10 +2,8 @@
 //
 //
 //import org.apache.spark._
-//import org.apache.spark.streaming.{Seconds, StreamingContext, Duration, Time}
-//import org.fiware.cosmos.orion.spark.connector.{OrionReceiver}
-//import org.apache.spark.sql
-//import org.apache.spark.rdd
+//import org.apache.spark.streaming.{Seconds, StreamingContext}
+//import org.fiware.cosmos.orion.spark.connector.OrionReceiver
 ///**
 //  * Example1 Orion Connector
 //  * @author @sonsoleslp
@@ -26,7 +24,7 @@
 //        val temp: Float = ent.attrs("temperature").value.asInstanceOf[Number].floatValue()
 //        (ent.id, temp)
 //      })
-//      .reduceByKeyAndWindow((a,b) => math.min(a,b),Seconds(10))
+//      .reduceByKeyAndWindow(_ min _ ,Seconds(10))
 //
 //      processedDataStream.print
 //
