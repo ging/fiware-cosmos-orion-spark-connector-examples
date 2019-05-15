@@ -257,7 +257,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.fiware.cosmos.orion.spark.connector._
 
 object Example2 {
-  final val URL_CB = "http://192.168.99.100:1026/v2/entities/"
+  final val URL_CB = "http://sparkexample_orion_1:1026/v2/entities/"
   final val CONTENT_TYPE = ContentType.JSON
   final val METHOD = HTTPMethod.POST
 
