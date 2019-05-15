@@ -216,7 +216,7 @@ curl -v localhost:1026/v2/subscriptions -s -S -H 'Content-Type: application/json
 EOF
 ```
 
-You might want to check that you have created it correcty by running:
+You might want to check that you have created it correctly by running:
 ```bash
 curl localhost:1026/v2/subscriptions
 ```
@@ -398,7 +398,7 @@ Nevertheless, Spark allows us to perform custom operations such as calculating t
 
 For this, we use the accumulator and the value of the 'reduceByKeyAndByWindow' function inside the given timespan to have a tuple with the sum of the values and the count of them.
 ```scala
-.reduceByKeyAndWindow((acc:(Float,Long),value:(Float,Long))=>{  (acc._1 + value._1, acc._2 + value._2)}, Seconds(10))
+.reduceByKeyAndWindow((acc:(Float,Long),value:(Float,Long))=>{(acc._1 + value._1, acc._2 + value._2)}, Seconds(10))
 ```
 So then we can use the function 'map' to get tuples classify by id and its average temperature.
 ```scala
@@ -418,7 +418,7 @@ object Example4{
     val processedDataStream = eventStream
       .flatMap(event => event.entities)
       .map(ent => ent.id -> {(ent.attrs("temperature").value.asInstanceOf[Number].floatValue(),1L)} )
-      .reduceByKeyAndWindow((acc:(Float,Long),value:(Float,Long))=>{  (acc._1 + value._1, acc._2 + value._2)}, Seconds(10))
+      .reduceByKeyAndWindow((acc:(Float,Long),value:(Float,Long))=>{(acc._1 + value._1, acc._2 + value._2)}, Seconds(10))
       .map((agg :  (String,(Float,Long))) =>  (agg._1, agg._2._1 / agg._2._2))
 
     processedDataStream.print()
