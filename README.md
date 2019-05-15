@@ -445,7 +445,7 @@ object Example5{
     val processedDataStream = eventStream
       .flatMap(event => event.entities)
       .map(ent =>(ent.attrs("temperature").value.asInstanceOf[Number].floatValue(),1L))
-      .reduceByWindow((acc:(Float,Long),value:(Float,Long))=>{  (acc._1 + value._1, acc._2 + value._2)},Seconds(10), Seconds(10))
+      .reduceByWindow((acc:(Float,Long),value:(Float,Long))=>{(acc._1 + value._1, acc._2 + value._2)},Seconds(10), Seconds(10))
       .map((agg :  (Float,Long)) =>( agg._1 / agg._2))
 
     processedDataStream.print()
