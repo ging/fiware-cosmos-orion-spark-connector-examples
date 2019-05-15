@@ -16,8 +16,8 @@ curl -v 192.168.99.100:1026/v2/subscriptions -s -S -H 'Content-Type: application
 	}
   },
   "notification": {
-	"http": {
-  	"url": "http://138.4.197.17:9001/notify"
+	"http": { 
+  	"url": "http://192.168.99.100:9001"
 	},
 	"attrs": [
   	"temperature",

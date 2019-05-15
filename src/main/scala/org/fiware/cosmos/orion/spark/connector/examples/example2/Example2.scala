@@ -1,4 +1,4 @@
-package org.fiware.cosmos.orion.flink.connector.examples.example2
+package org.fiware.cosmos.orion.spark.connector.examples.example2
 
 
 import org.apache.spark._
@@ -39,7 +39,7 @@ object Example2 {
     OrionSink.addSink( processedDataStream )
 
     // print the results with a single thread, rather than in parallel
-    processedDataStream.map(orionSinkObject => orionSinkObject.content).print()
+    processedDataStream.print()
     ssc.start()
 
     ssc.awaitTermination()
