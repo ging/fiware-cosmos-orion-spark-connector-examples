@@ -15,7 +15,7 @@ This repository contains a few examples for getting started with the [**fiware-c
 -   [Example 2: Complete Orion Scenario with docker-compose](#example-2-complete-orion-scenario-with-docker-compose)
 -   [Example 3: Packaging the code and submitting it to the Spark Job Manager](#example-3-packaging-the-code-and-submitting-it-to-the-spark-job-manager)
 -   [Example 4: Other operations](#example-4-other-operations)
--   [Example 5: Other operations (2)](#example-4-other-operations-(2))
+-   [Example 5: Other operations (2)](#example-5-other-operations-2)
 -   [Example 6: Structured values for attributes](#example-5-structured-values-for-attributes)
 
 ---
