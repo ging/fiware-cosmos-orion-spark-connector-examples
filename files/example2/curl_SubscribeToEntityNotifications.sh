@@ -1,4 +1,4 @@
-curl -v localhost:1026/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl -v 192.168.99.100:1026/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "description": "A subscription to get info about Room1",
   "subject": {
@@ -16,8 +16,8 @@ curl -v localhost:1026/v2/subscriptions -s -S -H 'Content-Type: application/json
 	}
   },
   "notification": {
-	"http": {
-  	"url": "http://$MY_IP:9001/notify"
+	"http": { 
+  	"url": "http://192.168.99.100:9001"
 	},
 	"attrs": [
   	"temperature",
