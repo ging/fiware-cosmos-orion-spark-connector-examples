@@ -371,7 +371,7 @@ Let's build a JAR package of the example. In it, we need to include all the depe
 This can be done through the `maven package` command without the `add-dependencies-for-IDEA` profile checked.
 This will build a JAR file under `target/orion.spark.connector.examples-1.1.0.jar`.
 
-### Submitting the job (Me falta)
+### Submitting the job (In progress)
 
 
 Let's submit the Example 3 code to the Spark cluster we have deployed. In order to do this, open the Spark GUI on the browser ([http://localhost:8081](http://localhost:8081))
