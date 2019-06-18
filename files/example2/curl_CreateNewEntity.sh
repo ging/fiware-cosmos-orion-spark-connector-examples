@@ -1,4 +1,4 @@
-curl 192.168.99.100:1026/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl localhost:1026/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "id": "Room1",
   "type": "Room",
@@ -16,4 +16,3 @@ curl 192.168.99.100:1026/v2/entities -s -S -H 'Content-Type: application/json' -
   }
 }
 EOF
-
