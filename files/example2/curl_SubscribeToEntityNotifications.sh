@@ -1,4 +1,4 @@
-curl -v 192.168.99.100:1026/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl -v localhost:1026/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "description": "A subscription to get info about Room1",
   "subject": {
@@ -17,7 +17,7 @@ curl -v 192.168.99.100:1026/v2/subscriptions -s -S -H 'Content-Type: application
   },
   "notification": {
 	"http": { 
-  	"url": "http://192.168.99.100:9001"
+  	"url": "http://localhost:9001"
 	},
 	"attrs": [
   	"temperature",
@@ -28,4 +28,3 @@ curl -v 192.168.99.100:1026/v2/subscriptions -s -S -H 'Content-Type: application
   "throttling": 5
 }
 EOF
-

@@ -7,7 +7,7 @@ do
     echo $temp
     echo $number
  
-    curl http://192.168.99.100:1026/v2/entities/Room1/attrs -s -S -H 'Content-Type: application/json' -X PATCH -d '{
+    curl http://localhost:1026/v2/entities/Room1/attrs -s -S -H 'Content-Type: application/json' -X PATCH -d '{
       "temperature": {
         "value": '$temp',
         "type": "Float"

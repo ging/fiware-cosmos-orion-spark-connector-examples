@@ -16,8 +16,7 @@ object Example5{
     val ssc = new StreamingContext(conf, Seconds(10))
     ssc.checkpoint("./output")
     // Create Orion Source. Receive notifications on port 9001
-    val eventStream = ssc.receiverStream(new OrionReceiver("localhost", 9001))
-
+    val eventStream = ssc.receiverStream(new OrionReceiver(9001))
     // Process event stream
     val processedDataStream = eventStream
       .flatMap(event => event.entities)

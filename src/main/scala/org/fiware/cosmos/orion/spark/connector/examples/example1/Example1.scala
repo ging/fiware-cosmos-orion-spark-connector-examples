@@ -3,7 +3,7 @@ package org.fiware.cosmos.orion.spark.connector.examples.example1
 
 import org.apache.spark._
 import org.apache.spark.streaming.{Seconds, StreamingContext}
-import org.fiware.cosmos.orion.spark.connector.OrionReceiver
+import org.fiware.cosmos.orion.spark.connector._
 /**
   * Example1 Orion Connector
   * @author @sonsoleslp
@@ -15,10 +15,10 @@ object Example1{
     val conf = new SparkConf().setMaster("local[4]").setAppName("Temperature")
     val ssc = new StreamingContext(conf, Seconds(10))
     // Create Orion Source. Receive notifications on port 9001
-    val eventStream = ssc.receiverStream(new OrionReceiver("localhost", 9001))
+    val eventStream = ssc.receiverStream(new OrionReceiver(9001))
 
     // Process event stream
-    val processedDataStream = eventStream
+    eventStream
       .flatMap(event => event.entities)
       .map(ent => {
         val temp: Float = ent.attrs("temperature").value.asInstanceOf[Number].floatValue()
@@ -26,7 +26,8 @@ object Example1{
       })
       .reduceByKeyAndWindow(_ min _ ,Seconds(10))
 
-      processedDataStream.print
+      .print
+
 
     ssc.start()
     ssc.awaitTermination()
