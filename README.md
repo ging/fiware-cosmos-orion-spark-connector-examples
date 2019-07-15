@@ -1,5 +1,3 @@
-:construction: WORK IN PROGRESS
-
 # fiware-cosmos-orion-spark-connector-examples
 
 [![](https://img.shields.io/badge/FIWARE-Processing\Analysis-88a1ce.svg?label=FIWARE&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAVCAYAAAC33pUlAAAABHNCSVQICAgIfAhkiAAAA8NJREFUSEuVlUtIFlEUx+eO+j3Uz8wSLLJ3pBiBUljRu1WLCAKXbXpQEUFERSQF0aKVFAUVrSJalNXGgmphFEhQiZEIPQwKLbEUK7VvZrRvbr8zzjfNl4/swplz7rn/8z/33HtmRhn/MWzbXmloHVeG0a+VSmAXorXS+oehVD9+0zDN9mgk8n0sWtYnHo5tT9daH4BsM+THQC8naK02jCZ83/HlKaVSzBey1sm8BP9nnUpdjOfl/Qyzj5ust6cnO5FItJLoJqB6yJ4QuNcjVOohegpihshS4F6S7DTVVlNtFFxzNBa7kcaEwUGcbVnH8xOJD67WG9n1NILuKtOsQG9FngOc+lciic1iQ8uQGhJ1kVAKKXUs60RoQ5km93IfaREvuoFj7PZsy9rGXE9G/NhBsDOJ63Acp1J82eFU7OIVO1OxWGwpSU5hb0GqfMydMHYSdiMVnncNY5Vy3VbwRUEydvEaRxmAOSSqJMlJISTxS9YWTYLcg3B253xsPkc5lXk3XLlwrPLuDPKDqDIutzYaj3eweMkPeCCahO3+fEIF8SfLtg/5oI3Mh0ylKM4YRBaYzuBgPuRnBYD3mmhA1X5Aka8NKl4nNz7BaKTzSgsLCzWbvyo4eK9r15WwLKRAmmCXXDoA1kaG2F4jWFbgkxUnlcrB/xj5iHxFPiBN4JekY4nZ6ccOiQ87hgwhe+TOdogT1nfpgEDTvYAucIwHxBfNyhpGrR+F8x00WD33VCNTOr/Wd+9C51Ben7S0ZJUq3qZJ2OkZz+cL87ZfWuePlwRcHZjeUMxFwTrJZAJfSvyWZc1VgORTY8rBcubetdiOk+CO+jPOcCRTF+oZ0okUIyuQeSNL/lPrulg8flhmJHmE2gBpE9xrJNkwpN4rQIIyujGoELCQz8ggG38iGzjKkXufJ2Klun1iu65bnJub2yut3xbEK3UvsDEInCmvA6YjMeE1bCn8F9JBe1eAnS2JksmkIlEDfi8R46kkEkMWdqOv+AvS9rcp2bvk8OAESvgox7h4aWNMLd32jSMLvuwDAwORSE7Oe3ZRKrFwvYGrPOBJ2nZ20Op/mqKNzgraOTPt6Bnx5citUINIczX/jUw3xGL2+ia8KAvsvp0ePoL5hXkXO5YvQYSFAiqcJX8E/gyX8QUvv8eh9XUq3h7mE9tLJoNKqnhHXmCO+dtJ4ybSkH1jc9XRaHTMz1tATBe2UEkeAdKu/zWIkUbZxD+veLxEQhhUFmbnvOezsJrk+zmqMo6vIL2OXzPvQ8v7dgtpoQnkF/LP8Ruu9zXdJHg4igAAAABJRU5ErkJgggA=)](https://www.fiware.org/developers/catalogue/)
@@ -16,7 +14,7 @@ This repository contains a few examples for getting started with the [**fiware-c
 -   [Example 3: Packaging the code and submitting it to the Spark Job Manager](#example-3-packaging-the-code-and-submitting-it-to-the-spark-job-manager)
 -   [Example 4: Other operations](#example-4-other-operations)
 -   [Example 5: Other operations (2)](#example-5-other-operations-2)
--   [Example 6: Structured values for attributes](#example-5-structured-values-for-attributes)
+-   [Example 6: Structured values for attributes](#example-6-structured-values-for-attributes)
 
 ---
 
@@ -374,16 +372,7 @@ This will build a JAR file under `target/orion.spark.connector.examples-1.1.0.ja
 ### Submitting the job (In progress)
 
 
-Let's submit the Example 3 code to the Spark cluster we have deployed. In order to do this, open the Spark GUI on the browser ([http://localhost:8081](http://localhost:8081))
-```scala
-org.fiware.cosmos.orion.spark.connector.examples.example3.Example3
-```
-
-
-
-Once filled in this field, you can click the **Submit** button and you will see that your job is running.
-Follow the section [**Triggering notifications**](#triggering-notifications).
-
+Let's submit the Example 3 code to the Spark cluster we have deployed. In order to do this you can use the spark-submit command provided by Spark.
 
 You can check that the vale for `temperature_min` is changing in the Context Broker by running:
 ```bash
