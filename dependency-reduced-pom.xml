@@ -4,7 +4,7 @@
   <groupId>org.fiware.cosmos</groupId>
   <artifactId>orion.spark.connector.examples</artifactId>
   <name>Fiware Orion Spark Connector Examples</name>
-  <version>1.0</version>
+  <version>1.1.0</version>
   <url>https://www.fiware.org/</url>
   <build>
     <plugins>
@@ -135,13 +135,13 @@
         <dependency>
           <groupId>org.apache.spark</groupId>
           <artifactId>spark-core_2.11</artifactId>
-          <version>2.4.0</version>
+          <version>2.4.3</version>
           <scope>compile</scope>
         </dependency>
         <dependency>
           <groupId>org.apache.spark</groupId>
           <artifactId>spark-streaming_2.11</artifactId>
-          <version>2.4.0</version>
+          <version>2.4.3</version>
           <scope>compile</scope>
         </dependency>
         <dependency>
@@ -189,7 +189,7 @@
     <scala.binary.version>2.11</scala.binary.version>
     <play2.version>2.4.6</play2.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spark.version>2.4.0</spark.version>
+    <spark.version>2.4.3</spark.version>
   </properties>
 </project>
 

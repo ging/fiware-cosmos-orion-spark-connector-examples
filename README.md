@@ -30,7 +30,7 @@ cd fiware-cosmos-orion-spark-connector-examples
 Next, [download](https://github.com/ging/fiware-cosmos-orion-spark-connector/releases/latest) the connector JAR from the connector repository and from the `fiware-cosmos-orion-spark-connector` run:
 
 ```
-mvn install:install-file -Dfile=$(PATH_DOWNLOAD)/orion.spark.connector-1.0.jar -DgroupId=org.fiware.cosmos -DartifactId=orion.spark.connector -Dversion=1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=$(PATH_DOWNLOAD)/orion.spark.connector-1.1.0.jar -DgroupId=org.fiware.cosmos -DartifactId=orion.spark.connector -Dversion=1.1.0 -Dpackaging=jar
 ```
 
 where `PATH_DOWNLOAD` is the path where you downloaded the JAR.
@@ -340,13 +340,13 @@ curl -v localhost:1026/v2/subscriptions -s -S -H 'Content-Type: application/json
 	"condition": {
   	"attrs": [
     	"pressure",
-	"temperature"
+	    "temperature"
   	]
 	}
   },
   "notification": {
 	"http": {
-  	"url": <b>"http://taskmanager:9001/notify"</b>
+  	"url":"http://spark-master:9001"
 	},
 	"attrs": [
   	"temperature",
@@ -369,7 +369,7 @@ Let's build a JAR package of the example. In it, we need to include all the depe
 This can be done through the `maven package` command without the `add-dependencies-for-IDEA` profile checked.
 This will build a JAR file under `target/orion.spark.connector.examples-1.1.0.jar`.
 
-### Submitting the job (In progress)
+### Submitting the job 
 
 
 Let's submit the Example 3 code to the Spark cluster we have deployed. In order to do this you can use the spark-submit command provided by Spark.
