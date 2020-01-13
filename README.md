@@ -367,7 +367,7 @@ Since we are going to run the code from inside a Spark Task Manager container, w
 
 Let's build a JAR package of the example. In it, we need to include all the dependencies we have used, such as the connector, but exclude some of the dependencies provided by the environment (Spark, Scala...).
 This can be done through the `maven package` command without the `add-dependencies-for-IDEA` profile checked.
-This will build a JAR file under `target/orion.spark.connector.examples-1.1.0.jar`.
+This will build a JAR file under `target/orion.spark.connector.examples-1.2.0.jar`.
 
 ### Submitting the job 
 
