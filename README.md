@@ -30,7 +30,7 @@ cd fiware-cosmos-orion-spark-connector-examples
 Next, [download](https://github.com/ging/fiware-cosmos-orion-spark-connector/releases/latest) the connector JAR from the connector repository and from the `fiware-cosmos-orion-spark-connector` run:
 
 ```
-mvn install:install-file -Dfile=$(PATH_DOWNLOAD)/orion.spark.connector-1.2.0.jar -DgroupId=org.fiware.cosmos -DartifactId=orion.spark.connector -Dversion=1.2.0 -Dpackaging=jar
+mvn install:install-file -Dfile=$(PATH_DOWNLOAD)/orion.spark.connector-1.2.2.jar -DgroupId=org.fiware.cosmos -DartifactId=orion.spark.connector -Dversion=1.2.2 -Dpackaging=jar
 ```
 
 where `PATH_DOWNLOAD` is the path where you downloaded the JAR.
@@ -367,7 +367,7 @@ Since we are going to run the code from inside a Spark Task Manager container, w
 
 Let's build a JAR package of the example. In it, we need to include all the dependencies we have used, such as the connector, but exclude some of the dependencies provided by the environment (Spark, Scala...).
 This can be done through the `maven package` command without the `add-dependencies-for-IDEA` profile checked.
-This will build a JAR file under `target/orion.spark.connector.examples-1.2.0.jar`.
+This will build a JAR file under `target/orion.spark.connector.examples-1.2.2.jar`.
 
 ### Submitting the job 
 

@@ -26,7 +26,7 @@ object Example1{
       })
       .reduceByKeyAndWindow(_ min _ ,Seconds(10))
 
-      .print
+      .print()
 
 
     ssc.start()

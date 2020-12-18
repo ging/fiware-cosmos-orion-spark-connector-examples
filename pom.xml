@@ -23,7 +23,7 @@ under the License.
 
 	<groupId>org.fiware.cosmos</groupId>
 	<artifactId>orion.spark.connector.examples</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.2</version>
 	<packaging>jar</packaging>
 
 	<name>Fiware Orion Spark Connector Examples</name>
@@ -45,7 +45,7 @@ under the License.
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spark.version>2.4.4</spark.version>
+		<spark.version>2.4.7</spark.version>
 		<scala.binary.version>2.11</scala.binary.version>
 		<scala.version>2.11.12</scala.version>
 		<play2.version>2.4.6</play2.version>
@@ -87,7 +87,7 @@ under the License.
 		<dependency>
 			<groupId>org.fiware.cosmos</groupId>
 			<artifactId>orion.spark.connector</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.2</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.json4s/json4s-jackson -->
