@@ -15,7 +15,7 @@ This repository contains a few examples for getting started with the [**fiware-c
 -   [Example 4: Other operations](#example-4-other-operations)
 -   [Example 5: Other operations (2)](#example-5-other-operations-2)
 -   [Example 6: Structured values for attributes](#example-6-structured-values-for-attributes)
--   [Example 7: Receiving simulated notifications adapted to NGSI-LD](#example-6-structured-values-for-attributes)
+-   [Example 7: Receiving simulated notifications adapted to NGSI-LD](#example-7-receiving-simulated-notifications-adapted-to-NGSI-LD)
 ---
 
 
