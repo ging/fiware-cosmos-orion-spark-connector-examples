@@ -15,7 +15,7 @@ This repository contains a few examples for getting started with the [**fiware-c
 -   [Example 4: Other operations](#example-4-other-operations)
 -   [Example 5: Other operations (2)](#example-5-other-operations-2)
 -   [Example 6: Structured values for attributes](#example-6-structured-values-for-attributes)
-
+-   [Example 7: Receiving simulated notifications adapted to NGSI-LD](#example-6-structured-values-for-attributes)
 ---
 
 
@@ -538,4 +538,114 @@ object Example6 {
 }
 
 ```
+
+## Example 7: Receiving simulated notifications adapted to NGSI-LD
+
+The first example makes use of the `NGSIReceiver` in order to receive notifications from the Orion Context Broker. NGSILDReceiver is defined as a source for receiving NGSI-LD events from subscriptions via HTTP. For simplicity, in this example the notifications are simulated with a curl command.
+Specifically, the example receives a notification every second that a node changed its temperature, and calculates the minimum temperature in a given interval.
+
+### Simulating a notification
+In order to simulate the NGSI-LD notifications coming from the Context Broker you can run the following script (available at `files/example7/curl_NotificationNGSILD.sh`):
+
+```bash
+while true
+do
+    temp=$(shuf -i 18-53 -n 1)
+    number=$(shuf -i 1-3113 -n 1)
+
+    curl -v -s -S X POST http://localhost:9001 \
+    --header 'Content-Type: application/json; charset=utf-8' \
+    --header 'Accept: application/json' \
+    -d  '{
+            "id": "urn:ngsi-ld:Notification:5fd0fa684eb81930c97005f3",
+            "type": "Notification",
+            "subscriptionId": "urn:ngsi-ld:Subscription:5fd0f69b4eb81930c97005db",
+            "notifiedAt": "2023-2-23T16:25:12.193Z",
+             "data": [
+             {
+                 "id": {"type": "Property","value": "R1"},
+                 "co": {"type": "Property","value": 0},
+                 "co2": {"type": "Property","value": 0},
+                 "humidity": {"type": "Property","value": 40},
+                 "pressure": {"type": "Property","value": '$number'},
+                 "temperature": {"type": "Property","value": '$temp'},
+                 "wind_speed": {"type": "Property","value": 1.06}
+             }
+         ]
+        }'
+	echo $temp
+
+    sleep 1
+done
+```
+
+### Receiving data and performing operations
+This is the code of the example which is explained step by step below:
+```scala
+package org.fiware.cosmos.orion.spark.connector.examples.example7
+
+
+import org.apache.spark._
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.fiware.cosmos.orion.spark.connector.NGSILDReceiver
+
+object Example7{
+
+  def main(args: Array[String]): Unit = {
+
+    val conf = new SparkConf().setMaster("local[4]").setAppName("Temperature")
+    val ssc = new StreamingContext(conf, Seconds(10))
+    // Create NGSILD Receiver. Receive NGSI-LD notifications on port 9001
+    val eventStream = ssc.receiverStream(new NGSILDReceiver(9001))
+    // Process event stream
+    val processedDataStream = eventStream
+      .flatMap(event => event.entities)
+      .map(entity => {
+        val temp: Float = ent.attrs("temperature").value.asInstanceOf[Number].floatValue()
+        (entity.id, temp)
+      })
+      .reduceByKeyAndWindow(_ min _ ,Seconds(10))
+    processedDataStream.print
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+```
+
+After importing the necessary dependencies, the first step is creating the source and adding it to the environment.
+
+```scala
+val eventStream = ssc.receiverStream(new NGSILDReceiver(9001))
+```
+
+The `NGSIReceiver` accepts a port number as a parameter. The data received from this source is a `DataStream` of `NgsiLDEvent` objects.
+You can check the details of this object in the [connector docs](https://github.com/ging/fiware-cosmos-orion-spark-connector/blob/master/README.md#orionsource).
+
+In the example, the first step of the processing is flat-mapping the entities. This operation is performed in order to put together the entity objects of several NGSI Events.
+
+```scala
+val processedDataStream = eventStream
+  .flatMap(event => event.entities)
+```
+
+Once you have all the entities, you can iterate over them (with `map`) and extract the desired attributes; in this case, it is the temperature. And In each iteration you create a tuple with the entity id and the temperature.  
+```scala
+// ...
+.map(entity => {
+    val temp: Float = ent.attrs("temperature").value.asInstanceOf[Number].floatValue()
+    (entity.id, temp)
+})
+```
+Now you can group the created objects by entity id and perform the operation in a time interval providing a custom processing window:
+```scala
+// ...
+.reduceByKeyAndWindow(_ min _ ,Seconds(10))
+```
+
+After the processing, you can print the results on the console:
+```scala
+processedDataStream.print
+```
+
+Or you can persist them using the sink of your choice.
 
