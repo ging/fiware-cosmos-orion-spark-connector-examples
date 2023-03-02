@@ -15,7 +15,7 @@ This repository contains a few examples for getting started with the [**fiware-c
 -   [Example 4: Other operations](#example-4-other-operations)
 -   [Example 5: Other operations (2)](#example-5-other-operations-2)
 -   [Example 6: Structured values for attributes](#example-6-structured-values-for-attributes)
--   [Example 7: Receiving simulated notifications adapted to NGSI-LD](#example-7-receiving-simulated-notifications-adapted-to-NGSI-LD)
+
 ---
 
 
@@ -553,7 +553,7 @@ do
     temp=$(shuf -i 18-53 -n 1)
     number=$(shuf -i 1-3113 -n 1)
 
-    curl -v -s -S X POST http://localhost:9001 \
+    curl -v -s -S -X POST http://localhost:9001 \
     --header 'Content-Type: application/json; charset=utf-8' \
     --header 'Accept: application/json' \
     -d  '{
@@ -601,10 +601,10 @@ object Example7{
     val processedDataStream = eventStream
       .flatMap(event => event.entities)
       .map(entity => {
-        val temp: Float = ent.attrs("temperature").value.asInstanceOf[Number].floatValue()
+        val temp = entity.attrs("temperature")("value")
         (entity.id, temp)
       })
-      .reduceByKeyAndWindow(_ min _ ,Seconds(10))
+      
     processedDataStream.print
     ssc.start()
     ssc.awaitTermination()
@@ -618,7 +618,7 @@ After importing the necessary dependencies, the first step is creating the sourc
 val eventStream = ssc.receiverStream(new NGSILDReceiver(9001))
 ```
 
-The `NGSIReceiver` accepts a port number as a parameter. The data received from this source is a `DataStream` of `NgsiLDEvent` objects.
+The `NGSIReceiver` accepts a port number as a parameter. The data received from this source is a `DataStream` of `NGSILDEvent` objects.
 You can check the details of this object in the [connector docs](https://github.com/ging/fiware-cosmos-orion-spark-connector/blob/master/README.md#orionsource).
 
 In the example, the first step of the processing is flat-mapping the entities. This operation is performed in order to put together the entity objects of several NGSI Events.
@@ -632,14 +632,9 @@ Once you have all the entities, you can iterate over them (with `map`) and extra
 ```scala
 // ...
 .map(entity => {
-    val temp: Float = ent.attrs("temperature").value.asInstanceOf[Number].floatValue()
-    (entity.id, temp)
+      val temp = entity.attrs("temperature")("value")
+      (entity.id, temp)
 })
-```
-Now you can group the created objects by entity id and perform the operation in a time interval providing a custom processing window:
-```scala
-// ...
-.reduceByKeyAndWindow(_ min _ ,Seconds(10))
 ```
 
 After the processing, you can print the results on the console:
@@ -648,4 +643,3 @@ processedDataStream.print
 ```
 
 Or you can persist them using the sink of your choice.
-
